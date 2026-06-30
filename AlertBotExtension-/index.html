@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attack Alert — Tribes of Malaya Wiki</title>
+<style>
+  :root{
+    --bark: #2b1c12;
+    --bark-deep: #1d130c;
+    --parchment: #ead9b8;
+    --parchment-dim: #cdb98c;
+    --rust: #b3502b;
+    --rust-bright: #e07a3f;
+    --jade: #5c7a5a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(circle at 20% 10%, rgba(224,122,63,0.08), transparent 40%), var(--bark);
+    color: var(--parchment);
+    font-family: 'Iowan Old Style','Palatino Linotype', Georgia, serif;
+    line-height: 1.6;
+  }
+  .crest-bar{
+    background: var(--bark-deep);
+    border-bottom: 3px solid var(--rust);
+    padding: 14px 24px;
+    display:flex; align-items:center; gap:12px;
+    font-family: 'Trebuchet MS', sans-serif;
+    letter-spacing: 0.12em; font-size: 0.75rem;
+    text-transform: uppercase; color: var(--parchment-dim);
+  }
+  .crest-bar .dot{ width:6px;height:6px;border-radius:50%;background:var(--rust-bright); }
+  header.hero{
+    padding: 64px 24px 40px; max-width: 880px; margin: 0 auto; text-align:center;
+    border-bottom: 1px solid rgba(234,217,184,0.15);
+  }
+  .eyebrow{
+    font-family:'Trebuchet MS', sans-serif; text-transform:uppercase;
+    letter-spacing:0.25em; font-size:0.7rem; color: var(--rust-bright); margin-bottom: 18px;
+  }
+  h1{
+    font-family: Georgia, 'Times New Roman', serif; font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0 0 14px;
+    color: var(--parchment); text-shadow: 0 2px 0 rgba(0,0,0,0.4);
+  }
+  .hero p{ color: var(--parchment-dim); font-size: 1.05rem; max-width: 560px; margin: 0 auto; }
+
+  .download-wrap{ text-align:center; margin-top: 34px; }
+  .download-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 16px 32px;
+    background: var(--rust);
+    color: var(--parchment);
+    border: none; border-radius: 3px;
+    font-family:'Trebuchet MS', sans-serif;
+    font-size: 1rem; font-weight:700;
+    letter-spacing: 0.03em;
+    text-decoration:none;
+    cursor:pointer;
+    box-shadow: 0 4px 0 var(--bark-deep);
+    transition: transform 0.1s ease;
+  }
+  .download-btn:hover{ background: var(--rust-bright); }
+  .download-btn:active{ transform: translateY(3px); box-shadow: 0 1px 0 var(--bark-deep); }
+  .filesize{
+    display:block; margin-top:12px; font-family:'Trebuchet MS', sans-serif;
+    font-size: 0.78rem; color: var(--parchment-dim); opacity:0.7;
+  }
+
+  main{ max-width: 760px; margin: 0 auto; padding: 56px 24px 100px; }
+  .step{
+    display:grid; grid-template-columns: 64px 1fr; gap: 22px;
+    padding: 32px 0; border-bottom: 1px solid rgba(234,217,184,0.12);
+  }
+  .step:last-of-type{ border-bottom:none; }
+  .step-num{ font-family: Georgia, serif; font-size: 2.4rem; font-weight: 700; color: var(--rust); opacity: 0.55; line-height: 1; }
+  .step h2{ font-family:'Trebuchet MS', sans-serif; font-size: 1.15rem; letter-spacing: 0.02em; margin: 4px 0 10px; color: var(--parchment); }
+  .step p{ color: var(--parchment-dim); margin: 0 0 12px; font-size: 0.98rem; }
+  code{ background: rgba(0,0,0,0.3); color: #f1d9a0; padding: 2px 7px; border-radius: 2px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+  .note{
+    margin-top: 40px; padding: 20px 22px; background: rgba(92,122,90,0.12);
+    border-left: 3px solid var(--jade); font-size: 0.92rem; color: var(--parchment-dim);
+  }
+  .note strong{ color: var(--parchment); }
+  footer{
+    text-align:center; padding: 30px 24px 50px; font-family:'Trebuchet MS', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(234,217,184,0.35);
+  }
+  @media (max-width: 520px){
+    .step{ grid-template-columns: 40px 1fr; gap:14px; }
+    .step-num{ font-size: 1.7rem; }
+  }
+  .image-placeholder{
+  margin-top:18px;
+  width:100%;
+  height:260px;
+  border:2px dashed rgba(224,122,63,.45);
+  border-radius:6px;
+  background:rgba(0,0,0,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--parchment-dim);
+  font-family:'Trebuchet MS', sans-serif;
+  font-size:.95rem;
+}
+
+.image-placeholder img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:4px;
+}
+.step-inline{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+
+.step-inline p{
+    margin:0;
+}
+
+.inline-image{
+    width:140px;
+    height:auto;
+    border-radius:8px;
+    border:1px solid rgba(224,122,63,.3);
+    box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+</style>
+</head>
+<body>
+
+  <div class="crest-bar"><span class="dot"></span> THE FOOLS FAMILY WIKI &nbsp;·&nbsp; Tribes of Malaya</div>
+
+  <header class="hero">
+    <div class="eyebrow">Tools & Add-ons</div>
+    <h1>Attack Alert & Famine threshold Extension</h1>
+    <p>Get pinged on Discord the moment an attack is detected, when it lands, and when your Famine reaches the set threshold.</p>
+
+    <div class="download-wrap">
+      <a class="download-btn" download="AlertBotExtension.zip" id="downloadLink">⬇ Download Extension</a>
+      <span class="filesize">AlertBotExtension.zip · 3 files (manifest.json, content1.js, content2.js)</span>
+    </div>
+  </header>
+
+ <main>
+  <div class="step">
+    <div class="step-num">01</div>
+    <div>
+      <h2>Download &amp; unzip</h2>
+      <p>
+        Click the download button above. Once it's downloaded,
+        right-click the <code>.zip</code> file and choose
+        <strong>Extract All</strong> (Windows) or double-click it (Mac).
+        You'll get a folder called <code>AlertBotExtension</code> with all 3 files inside.
+      </p>
+
+      <div class="image-placeholder">
+        <img src="images/image1.png" alt="Download and unzip extension">
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+  <div class="step-num">02</div>
+  <div>
+    <h2>Open your browser's extensions page</h2>
+
+    <div class="step-inline">
+      <p>In Chrome or Edge, go to:</p>
+
+      <img src="images/image2.png"
+           alt="Browser menu"
+           class="inline-image">
+    </div>
+
+    <p><code>chrome://extensions</code> &nbsp;or&nbsp; <code>edge://extensions</code>  hover the mouse ang click Manage Extensions</p>
+
+    <div class="image-placeholder">
+      <img src="images/image2.1.png" alt="Extensions page">
+    </div>
+
+  </div>
+</div>
+
+ <div class="step">
+  <div class="step-num">03</div>
+  <div>
+    <h2>Turn on Developer Mode</h2>
+
+    <div class="step-inline">
+      <p>
+        Look for the <strong>Developer mode</strong> toggle, usually in the
+        top-right corner, and switch it <strong>On</strong>.
+      </p>
+
+      <img src="images/image3.1.png"
+           alt="Developer Mode toggle"
+           class="inline-image">
+    </div>
+
+    <div class="image-placeholder">
+      <img src="images/image3.png" alt="Developer Mode enabled">
+    </div>
+
+  </div>
+</div>
+
+  <div class="step">
+    <div class="step-num">04</div>
+    <div>
+      <h2>Load the extension</h2>
+      <p>
+        Click <strong>Load unpacked</strong>, then select the
+        <code>tribes-of-malaya-alerts</code> folder you unzipped in Step 1.
+      </p>
+
+      <div class="image-placeholder">
+        <img src="images/image4.png" alt="Load unpacked">
+      </div>
+    </div>
+  </div>
+  <div class="step">
+  <div class="step-num">05</div>
+  <div>
+    <h2>Update &amp; Reload the Extension</h2>
+
+    <div class="step-inline">
+      <p>
+        Whenever a new version is released, replace the old extension files
+        with the new ones. Then return to the Extensions page and click the
+        <strong>Reload</strong> button to apply the latest update.
+      </p>
+
+    </div>
+
+    <div class="image-placeholder">
+      <img src="images/image5.png" alt="Reloading the extension">
+    </div>
+
+  </div>
+</div>
+
+  <div class="step">
+    <div class="step-num">06</div>
+    <div>
+      <h2>Confirm it's running</h2>
+      <p>
+        Open Tribes of Malaya. You should see a console log confirming
+        the alert engines are online. Attacks and Famine alerts will now
+        automatically post to your Discord channel.
+      </p>
+
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Heads up:</strong> This extension only detects when an attack is incoming, when it lands, and when your Famine reaches the configured threshold. It does not provide any other game automation or features.
+  </div>
+</main>
+<div class="note">
+  <strong>Creator's Note:</strong> This extension was created by <strong>Havoc</strong> to help THE FOOLS FAMILY receive Discord alerts for incoming attacks, attack landings, and Famine threshold warnings. If you encounter any bugs or have suggestions for new features, please contact Havoc.
+</div>
+   
+
+  <footer>THE FOOLS FAMILY · Tribes of Malaya Wiki</footer>
+
+<script>
+  const b64 = "UEsDBAoAAAAAADJ43lwAAAAAAAAAAAAAAAAYABwAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvVVQJAANP2kNqT9pDanV4CwABBAAAAAAEAAAAAFBLAwQUAAAACAAyeN5cwWm1hDsJAAB4FwAAIwAcAHRyaWJlcy1vZi1tYWxheWEtYWxlcnRzL2NvbnRlbnQxLmpzVVQJAANP2kNqT9pDanV4CwABBAAAAAAEAAAAAK1Y63baSBL+v+fsO1Q4Ocfg5U642ePMEsAxEwxewPFmYh/cSA0oFmpNtwQmHr/B/pknmDfZZ5pH2OqWAN2c2Zld/bBFq7u6+quqr6o6nc7A2Vt4+utfAJ9CAc4SHmgPB+e999ej1qQ3HCRO8dZrzBIOdHrj9nDUmd50310Mhx+m16M+nEFq6Ti2OCkUdENojOt5ja0KxDYKGzpbMvYgCqVquVQtFhvNYqVWrtWb5Wa98HE6moy6P9pNezi52Pz49R9svR7NW9a8++Hd49WGsflk1vjycVa7/mlx7tij6/f1m+Jk+s+66z60lu/aWn1tp0497fZnfG+yGTFhTkxzRrQH4K5JYc44uJZpCIfqYHM2N0wqQsfqnreu+5Npq98dTaaTi1F3fDHsd/BopaJ8TiE4uz3Eb8ObwbTjwza9HOPUWhGOvT8ltQS1KcEFczkYFqwME/enKEDHnffqdnqjbnsCE5QGvQ5ctq7gpje5gPb1eDK8hIMml8NO77zXHY2Dishl06t+61N3NJVLz3bGlk+qVKo3G6kTeAKLrOgJpC7Immm5VBbAt1NPP5HTys1apfqmXCk1ymiYZq2IU5wlp2LJTJxRVRDAczYou1aslWKypyVc+Ydkl5Jk15vFZlx2+f8iu9msJOhd+aOyqwmiK5XKm6Dor3QtsYYw3PVytVFs1quNaqNZa5Rqjaqc9DtwV0t1acmD7BEl5vQHElW7XK3Wy8V6sVqpFkv1cr1cCavdSJBdK1bfhGR3H79uc39etif6+fSbtPNfPIEoaelrYmkYuxOOMW1YC+iTLeUCct6IAJNgOBCTcgccY0WFQ1Y22JTDhG0sjKxg1Mi5LTl1Imdi0Fh0A5fETmdOA3t2Hx0U7QgYDvqf8JwUbJdTsNwV5Ya2kwtzzlaA84w1BUmGwuGon8iCsbCYfAWHPjpgE47gOqizt8HctXANs2BBHSmqpyNZB4LX4dvgz4PyLjeHsy++0rhhemNYOtvkTaYRKTCPBplnTpOWroijLXGlJyJvE2cpLZ5X4+nCbSF9q/8tU4gu5tRxueWv/t77/7l0B+gT14MPA6SgVGDFM2hqYppmogfwBSWu8p0mgD8aRCjYd0grOncYbD1GdeiCkyCfZ/0NBNrINMGYI+VzupCkz6keh/3KW9fTqeUYzjaMv4eYoyyDkAWsFNAat0hHKPizt+TupcO/MD0ORWCNPM6p55K2aWiGY25hbpJF6HxKVxGHcaxxYqOXc7LxPJGadIUnFiopSnw1l3McAPqIboyjTEd01zjC0Ac1YmquqTwrjmDbW3mOS9rMtZwkCKW8rrcl4qgzzZWv+Z9cyrdj1EXDbdJHurH+rBOH5BwXfxvEzDmE4w5nKaQXtLdGp1JQ6u4oin9AfgxzTwM8+UQe/CyoS96wLMrleB4DdpVOjhjNpMQauKsZ5WMV1yjEF5fn1DaJRtOFbGGRhaOjzGHkVvhDiULnO7hQGNKCoD1ELrZTFtPXC5H4yhADMkjv5WQwKg9CTzx/+X2HivjK3rCCWnrHI/4rsjUZ0dO29z8E8JxK1kioB7NRMyDvLZlMIVfD8SSVDX9cUqIjK8q0mWozjGrLyU22NsWMlCK29HflfIUvglmpUOKSz4zp2xP4YTwc5D3iNebbvbYBCALvecVPacq5LI6lSZhJ8/gT/TB149WrklM0KoS0+AyZ9QHU9xNMePiS2dkljh0mTFuKlyGhUkwaXQIzVc+as+wu0uTHrJ8zJrv8mcQ+KgQ6uxws3WUvDE1++JHf52l4oXY5TZY9QPr/hliZHRTNB3lG8mBcnowpBGDCHqiFEu+/+/vrp4j+z2/v9/n1sNA3Vrh0lU9K87wBHeH+t1//9W94/RTc5BmOj7uX3dH77qD96QT6wxs4Hw47r46P7yM+knIF5fIo0qUk9nDJLANpJuqKKbJGCuJTzI9y6q6nMVZkQYWkiRly0XxFECCiOhzDoStRkKGXW1dzj5Vy3rYWMakUg1oXKPFz5ITqK6YeU2mmzjjqjT/A8BzOW5e9QRfkWFSeWqVToXHDlmhIfNSp0JEoXyPVEyxTdGItKGeuwFxhso0ie5U4dbYihvUKJktD+AXTBlsTsHASwosVE4FSbimnagz9UiZfL1PgfJlj8lF8fWOZCCjW3NVSEevEYhYSJs0NanpIxD/KBylgZ6fffv3lFxhh74ZWgtSamK4cvr+937mVdN3n2/t7/GpgZ2fJzw53aYwiEoUj1AozjzJHVGJiSNsF9jo+fv0UiNi8w/pYY5nU4+d05vn4GArolZFAjs8L6YiNqaBBTt49d0mw7mtZXCkLvg5WPOkMbtEbD3fyw8ue7wK0FwjTb7D6i2zms+B4i6G/GmvE+hM1kh/lB4Y5S6y9TiG6JAC9tyZebYToBGud3hw2WM8Q68iR0cBMrMllhSNVBL/aUfWNJtdnQTwYdoDqw4XF7lxnZ4eKFX7+OXQU/KZqTRwOqeuPv1AEhnNz6AQd2SKs0FOUrvoWPRZ7jX2TdbjNUOEobKoZc5wg8My7OjiKY8Q9Q3SfP0j+Pnn45KWrkRD2Eq8gAN99M7sddJOkc6acOo+vLxRhoXYNp4fbtzx6hm+rjLRDMaSYD2t7STGHo5YlUMyWTrrBycCSCMxHQmCWQ3/QaARlucuR32pazJFjgcI4iIU8Vy6i+NvEa6MYMPL5H6qI07i0CF5ij1dW4p9RncWVYSmPkxwT6aIj9BLs9KiksqcY2kOVl4gJDF9WxlcF0gm0scT1O45dYsFjYI8hOYBTTFQInQrPBcMspto9MmMqhv3jxbZC5vYmoJ1wNWY42BBkdKL6cGxn/FRmoh7Y4WBXI6ehDluYcYPOcdMFtsGY9dTGxNIRfBvIAvNB3KwRJNFddp6XaMYo8jq2O0jf/pLTl4GNd3Fthjl9OFMJnkNXdmfQZ8yGLpa8yBY5GJO5ghBZT3XFBoaOvDNRlzrB2w950L0k/+7DdZSNdsPp0MWxfBIywS5rHFg4KDnPvJf0vuOTpXqoNdCWhqn3saz0Encg/Ql35nBKY+PEkUWY61Dx8qdzw0QKxRLjSDhbkx5hH6ahHcTRXUzfXe1vskU61aFzagl5i6OwPpfXNRvGH+BjI19CfOU9LuJ7RXlOXUi0fR8W0FIhmE9Jwc8ZBOY/UEsDBBQAAAAIADJ43lx9VjqKDwwAAAMkAAAjABwAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvY29udGVudDIuanNVVAkAA0/aQ2pP2kNqdXgLAAEEAAAAAAQAAAAAvVrdctvGFb7PTN5hw7omKFP8FSVRtuzSIm0zkkiFpOs6siqtgCWJCMQiwEIyo+EzZNLJVW7Smz5Ap73o8/gF6kfoOQuAxM9SkT2Z4sIiuXvOnv/znYU1rUD2n5LbL78g8JTLZF/xkIN+70X35etBa9Tt95RbAnqd254g7e7woD9on7/pPH/V7x+evx4ckX2SmwrheHvlsmF6OneNks5nZeqY5Rt2OeX8yitXG7XqVrNSrTS3qtuV3frW9k75m47g9W8r1/3WiE7G4+nh5uCbl85gczruvbx5+4rT598/H10ffFt/6VaMdtsav+RvBnO30ROVb8Ww0zvoTga5x19+sdSv3R10DkZk1H/TI902OW6dEK07sbnLPOIx95q5oMXMsZhg1rwQVwtJzk+OWm87g3Mk24+shk+uWt1p7ub2yC2x6Yztkdwres31XJGE6naNPdxUa27XG1u1enW31qw1m9uVHFkU42y2K9vVDJvz6qcz2mlWmllGtU9n1GzWFRLVP51RvV7fijP6gV2nmOzUGruV5k5jt7Hb3N6tbu82Ujwa1Z2EkQeMWudf07QstUZjp1bZqTTqjUp1p7ZTq6f4bFcaCVE673+Yb96TT8Bm8fjOlLnHswzKjQ2yQVq6MK8ZOaauPiUDNjE94c7JRnl5yiFjjkd82/zeZ0S4VL8y7Qm5YnOPWFy/YgasCdMiYsoIFQLWiUVtwyOCE8dl18wWxPAdy9SpYMTmwhzjRxNiOx7lVMohxVhKsU9sdgOiOVrhcXbvEZzyhgp9ylwv3DpkAraSWNp13qPIwiP93tFbKaPtz5hr6mTEb2zMxLHLZ3JB910XhXXohBGoHQGPsW/rKCyZMIEkXQMqVywBUc7Y15WQvmv1L78LBQN22o1pG/ymBEaT2pemLhtHeiVJZ6gVUAYsSg4VU4yXkvxdK78ra++MR4VymthlwnftkPpZ8Pe0ekYgol73DntQRnIxigXR5UaNFdIKhIyUVGEURiaOm+fE5WPTYl0DrGiKedJOgWZCWhBUi1kzxt0cEy1V7k4DkrN1Qq7ZnhU5RmP7loVRotbEoa7HRuaMjfiQgdiGpwn4NhSuQiHYLDD6wh0lDwJdaPm9fFotubFkMXsippi5pJbRKHS+afuCIU8pSNcWAe1p5axIqhV1xHiBoFmiqpIIBfrK9Hq0p4XHFcjDhyT8KWRWyAgYM2FEBxVku1IgjyIJUgctlG4IZA4T8Tirb2jMtOTh0aGUSfICBHyKIUoGsV95vM7Rnk7tF9xtyaLlqcLVgG6sC2aEW0DG03hkhbZ3qI1LBtdBAFuUoFC68yGzgBS4W5aWxy2JiBhzl2jQ6yUx4eOAScbg6CdcKZm2zdwRey/gk275BvO0XNcGwIC1OJAup/ZXIKNLb5AapEyxE64509Lhgc86TkGJZ+5xWKNCzsvapGmnfy2cPSq8y9anLBOgT/J7lvwO4RtKKIuYfWVj0W5NJoCaPO7mPkFuCC7wTdwIwS8di6HT4OTsjys7wfGhomt1wqCNjLI6LLILVuw9ZdWOceCCWsNlJq8YPltXkyIjFcI4z3JORXDJ8b2pdru0cjFxaBGVbJtQw+h8qTBZpCVWJ3WYnakD1ycfs412gHlO6Nzi1ICKJf8mwnjM0HwKZF9MB/uMiSlH9HTSH45yxeTilFEDYAIir9wBtwV4Z3M0dxhgsRx1AnACUpW/87idhGz4XHID7PH1sN8rAS6BlDPH86W0MWPEPpdkc9WY6+KYg/7lFivBV+5quTfB5AHwiOsQyJjDcmUPcCB8KBTWWg1QooOMA+u2LOZCoQdvMbdrj3lxrV8RkXUcrk+PPUWZW66ugg8ia1oaWxzEjdGSMpTkSqIo39nX09uYoG1EgQEowo9x7nG2WBun3JfILqQqAe9X+JOWPX/VNIfSQVqMJuwHWqEA2W0MBfRFrVYk+Uo+y2fVR7N8osS7Dx86c2bAJNDg6T6p1iCJ8yfHeUjUfOs4HyOItAz+/hG2rl18Fv7dw00kfSb0FCg2kHqdUQtILh7chjpIoqzQi70Ht6Hd8GOo+oI8uEXpFxcK/wE5GKIdjSpY6ZbBh1Vq+aW0HGfImhktG0KSdw9w7h1sEQYDx4vXtiuHBObC/CGRvPaHB7dBFC4KF9n4QEjK7RG/Yjba5smfYHdSmcVTlcZhlieHbnxyelBGoIJcfPjl7//9z49guPgxC7Kx8bb/ekCet4Yd0h2S1712Z0Bao1Hr4PCrjY2LVJHJ+R5zUT+sSUOd+4I85yJdyHL0moLg5zAa4L7obsOcwdDiYa+8ZB4fzyiYjMqbDlOwmVcec25sXjc239drJceeQJ1JsWWzS2Z4wPJUgSFyAOctKdeHX35GTbu9g/5xt/cy1Ia0O6POwajTJsF6WmjJAzCL7poO2gdt1rIJDfo4jp8zOX5a4MxLGD43IATDQraAIXVKvTA6YH0OwQxQa0ZN+6u0CUO/WIAMIEUa1cZuvV5Lqyo3jU1mBepmF/GBNhG54uOvP/1EBj6UWpiVwS3g8iLJXVPLx+WLdxdRJGHoLt5dXMCqaVumjcvChaE53U4Uh3z48Z9oV8xcbTiHuJ4R7PaFzFHxJE8fNqaWd8/T/kVwesbG07UTZzwRUArS/WCxN3iqOil70JnKI4hUPAFFBSiXdb9QErw77IclqpAkW5zFumosme8ADapqFV5WHLJ5UA9jfjqPhdh5TONjbxGvHnJQyl43lCAktRj7LPRW0FDDSNCkUJVqrDMY5HHnPdN9TJtj7ATxbrwpTVkCUJyB8Ch4hvopqShnBA+aNvgISo6WuJZNPxH6QLUA4Un0kaqixVgdX8ERFeZdYyUQGvL8LkNFT7lMXnT/0mnvkSMAC3iDwyJdCQAXB+qGbViMuNF1kmSNq9y25oSOoXsQc+aAEHdJl7iSisRLoBZFgVkUM77LoGjCMIkUpv5sq9xX4N+C8+txZ9zzxsrndtLbWYSp6r9GsvNGBJ/VgT/++rd/KPrv6FWHdHqd47fkVWtIjlrQgduf33rv2SM//vrzv8lwNOgedoIXGINj6Iz463364gjieMo9YVpRV5QXlKqeyMdjUzepBcE8NYXcgkrA8t2dsaJsif+vKi13Zy/dglEo6H1DndqfcXsYxssKOu4rbyWzyDnIm9UlT/piaHWjvKKBoivrsbICKy56wqtxPk6etuYScN2EDlUjujK5s31AbRxSmJ3n5NJl9GqPDK9MB4rdjBkmxTdM2CAgZjCMqAVbjLnsLMzItpHE+U/2sYdg5sHkwDJXDsnGG14l/O6YfnXSJfXY0JzYVPguC5t89vBEt1cz0qml+xaYxjiKNdj90M2PUlbYWI7BSV7oaNNrBQYdrLTZDxDTb7ksbGcY/quuhREUhIz0EGjmEV/eGVBsc1C5YPq1LDOY38L2C+0QoPWUWwbRHpU3yVY02RYyh46mpkc8CBYICnlZBWM0NtOg+IAY1IUu6mG5AQEm5Jq6JrWFR26mUMsBjhPuMLusWyBK8B4FggPQOcrFbD953jIdTle+HkWFp0hWPy6derZKmWRjg3R2TTnWq3ooBq6Cm7x5TwbNw4fBZQe99DSFUACylLFRIE/IFgbBOrCkjgMcCNbgGZmpirUUzF6kgy68zM+cppQsfKEHlsbyDCItyz5x8LbTwNd20otLpaOQCt5fEfiXvb8f9gBcqSmNV0z6QIVlPvemS+2sOyHP6ssqB9+YDmiOSEC+11xNqo3NMNGoL2AKFaZOdItRDHcJOrHLuJBLpQTXLtQY8E6R3LAo1yQV8R0AioBu5ADmoS/xvKTFsUg71PPQFbH3lOi5kqLTqIJ4TQ7hW1xFAmFEBYXvqZLbI1n+MPSX8UQtNE7wJrhaAXkBwmyG9eqTgKrivE8ArGHfw/7m8SB6TTA9tXUmQaq0UuxNNb8M/u9FQB1/OdEPV6KX0L6QN8TRz9lBSYFgIrSzahRJ3qXweG356ghvmhM32/rUtIwjsEhwlxCDdZ5/KVzGMr/DEa55ibd665demBaYGIBs3hNzi+WLJK9bEGH5s4zE0dW1xSdars3GzJZpcMChdL5wwaQ33L0if94p7eI4unzPfxK8+Udo17En0A1IX14elHLIelEA4/wPUEsDBBQAAAAIADJ43lxKoGMV3QAAAKMBAAAlABwAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvbWFuaWZlc3QuanNvblVUCQADT9pDak/aQ2p1eAsAAQQAAAAABAAAAACFkM1qwzAQhO+BvIPQMRg7SW+59QF6yy0Es5bXWK2lNdpNSgl59+gnpD4UehI7861m2Nt6pZR24O2ALO0VA1vy+qDequx4cBgnfQy2Q1Y0qA+Y4AfU+4RBWBfqd03v6u1TnDE4y0nnaJySFlUwYq94hE4n4VzQkWL23/woMvOhaTa15Ao0uFygNuSaTYlaYL1lQ6HPLsy2+cZuJPriiC7yDHlBLy2bYGdZxN3Kk08iZsRs/dfhXL22PsvC8/9dHefqFbdP4wIOF9+CpKP1ZC4uFbL9hLoA99x3vbo/AFBLAQIeAwoAAAAAADJ43lwAAAAAAAAAAAAAAAAYABgAAAAAAAAAEADtQQAAAAB0cmliZXMtb2YtbWFsYXlhLWFsZXJ0cy9VVAUAA0/aQ2p1eAsAAQQAAAAABAAAAABQSwECHgMUAAAACAAyeN5cwWm1hDsJAAB4FwAAIwAYAAAAAAABAAAApIFSAAAAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvY29udGVudDEuanNVVAUAA0/aQ2p1eAsAAQQAAAAABAAAAABQSwECHgMUAAAACAAyeN5cfVY6ig8MAAADJAAAIwAYAAAAAAABAAAApIHqCQAAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvY29udGVudDIuanNVVAUAA0/aQ2p1eAsAAQQAAAAABAAAAABQSwECHgMUAAAACAAyeN5cSqBjFd0AAACjAQAAJQAYAAAAAAABAAAApIFWFgAAdHJpYmVzLW9mLW1hbGF5YS1hbGVydHMvbWFuaWZlc3QuanNvblVUBQADT9pDanV4CwABBAAAAAAEAAAAAFBLBQYAAAAABAAEAJsBAACSFwAAAAA=";
+  const link = document.getElementById('downloadLink');
+  function b64toBlob(b64Data, contentType) {
+    const byteCharacters = atob(b64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: contentType });
+  }
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    const blob = b64toBlob(b64, 'application/zip');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'AlertBotExtension.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
