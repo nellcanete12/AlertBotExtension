@@ -617,6 +617,7 @@
   </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
   function switchTab(name){
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
@@ -628,7 +629,7 @@
 
   const link = document.getElementById('downloadLink');
   const EXT_FOLDER = 'AlertBotExtension'; // folder sitting next to this index.html
-  const EXT_FILES = ['manifest.json', 'content1.js', 'content2.js'];
+  const EXT_FILES = ['manifest.json', 'content1.js', 'content2.js', 'content3.js'];
 
   link.addEventListener('click', async function(e){
     e.preventDefault();
