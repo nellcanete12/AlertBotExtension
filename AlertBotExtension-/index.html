@@ -29,10 +29,21 @@
     background: var(--bark-deep);
     border-bottom: 3px solid var(--rust);
     padding: 12px 24px;
-    display:flex; align-items:center; gap:12px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
     font-family: 'Trebuchet MS', sans-serif;
     letter-spacing: 0.12em; font-size: 0.75rem;
     text-transform: uppercase; color: var(--parchment-dim);
+  }
+  .crest-bar-left{ display:flex; align-items:center; gap:12px; }
+  .version-badge{
+    background: rgba(212,169,74,0.12);
+    border: 1px solid rgba(212,169,74,0.4);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
   }
   .crest-bar .dot{ width:6px;height:6px;border-radius:50%;background:var(--rust-bright); }
   .crest-bar img{
@@ -74,6 +85,7 @@
   }
   .tab-btn.active[data-tab="lore"]{ color: var(--violet-bright); border-color: rgba(169,136,212,0.4); }
   .tab-btn.active[data-tab="alliance"]{ color: var(--gold); border-color: rgba(212,169,74,0.45); }
+  .tab-btn.active[data-tab="howitworks"]{ color: var(--jade); border-color: rgba(92,122,90,0.45); }
   .tab-panel{ display:none; }
   .tab-panel.active{ display:block; }
 
@@ -306,12 +318,16 @@
 <body>
 
   <div class="crest-bar">
-    <img src="images/logo1.png" alt="THE FOOL crest">
-    <span class="dot"></span> THE FOOLS FAMILY WIKI &nbsp;·&nbsp; Tribes of Malaya
+    <div class="crest-bar-left">
+      <img src="images/logo1.png" alt="THE FOOL crest">
+      <span class="dot"></span> THE FOOLS FAMILY TOOLS &nbsp;·&nbsp; Tribes of Malaya
+    </div>
+    <span class="version-badge">v1.5</span>
   </div>
 
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="extension" onclick="switchTab('extension')">Attack Alert Extension</button>
+    <button class="tab-btn" data-tab="howitworks" onclick="switchTab('howitworks')">How It Works</button>
     <button class="tab-btn" data-tab="lore" onclick="switchTab('lore')">The Fool — Alliance Lore</button>
     <button class="tab-btn" data-tab="alliance" onclick="switchTab('alliance')">Alliance</button>
   </nav>
@@ -434,10 +450,19 @@
     <div>
       <h2>Confirm it's running</h2>
       <p>
-        Open Tribes of Malaya. You should see a console log confirming
-        the alert engines are online. Attacks and Famine alerts will now
+        Open Tribes of Malaya. And test the famine alert
+        by lowering your food below the threshold you set in the extension.
+         Attacks and Famine alerts will now
         automatically post to your Discord channel.
       </p>
+
+      <div class="image-placeholder">
+        <img src="images/image6.png" alt="Console log confirming alert engines online">
+      </div>
+
+      <div class="image-placeholder">
+        <img src="images/image6.1.png" alt="Discord channel receiving alert notification">
+      </div>
     </div>
   </div>
 
@@ -446,8 +471,50 @@
   </div>
 </main>
 <div class="note">
-  <strong>Creator's Note:</strong> This extension was created by <strong>Havoc</strong> to help THE FOOLS FAMILY receive Discord alerts for incoming attacks, attack landings, and Famine threshold warnings. If you encounter any bugs or have suggestions for new features, please contact Havoc.
+  <strong>Creator's Note:</strong> This extension was created by <strong>Havoc</strong> to help THE FOOLS FAMILY receive Discord alerts for incoming attacks, attack landings, and Famine threshold warnings. If you encounter any bugs or have suggestions for new features, please contact Havoc. If you encounter any bugs of this web please contact <strong>Exzy Ja</strong> <strong>on Discord.</strong>
 </div>
+
+  </section>
+
+  <!-- ===================== TAB: HOW IT WORKS ===================== -->
+  <section id="tab-howitworks" class="tab-panel">
+
+    <header class="lore-hero">
+      <div class="crest-emblem" style="border-color: rgba(92,122,90,0.5); background: radial-gradient(circle, rgba(92,122,90,0.18), transparent 70%);">
+        <img src="images/logo2.png" alt="THE FOOL emblem">
+      </div>
+      <div class="eyebrow" style="color: var(--jade);">How It Works</div>
+      <h1>How the Alerts Actually Work</h1>
+      <p>A quick rundown of what the extension is watching for, and when it sends a ping to Discord.</p>
+    </header>
+
+    <main class="lore-main">
+
+      <div class="lore-block">
+        <h2 style="color: var(--jade);">Attack Alerts</h2>
+        <p>Attack alerts only work while the <strong>attack timer is open</strong>. The extension watches that timer, and when it sees an <strong>incoming attack</strong>, it sends a notification to Discord.</p>
+        <p>if someone attack you <strong> open theactive timer</strong>, so it will  sends a notification the moment the active timer <strong>open</strong>.</p>
+      </div>
+
+      <div class="lore-block">
+        <h2 style="color: var(--jade);">Low Food (Famine) Alerts</h2>
+        <p>This one watches your Famine level. When your food drops <strong>below the threshold you set</strong>, it sends an alert straight to Discord so you know before it becomes a problem.</p>
+      </div>
+
+      <div class="tarot-card" style="border-color: rgba(92,122,90,0.35); background: linear-gradient(160deg, rgba(92,122,90,0.10), rgba(0,0,0,0.15));">
+        <h3 style="color: var(--jade);">🛡 Best for AFK Convenience</h3>
+        <ul class="tarot-list">
+          <li>Great for when you need to step away from the game</li>
+          <li>Make sure the <strong>active timer</strong> is open before you go AFK — the bot needs it open to detect attacks</li>
+          <li>Famine alerts work independently, based on your set threshold</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <strong>Heads up:</strong> No active timer open means no attack detection. Always open it before stepping away if you want reliable alerts.
+      </div>
+
+    </main>
 
   </section>
 
@@ -539,13 +606,22 @@
 
   </section>
 
-  <footer>THE FOOLS FAMILY · Tribes of Malaya Wiki</footer>
+   <footer>
+    THE FOOLS FAMILY · Tribes of Malaya Tools<br>
+    <a href="https://discord.gg/cttQE5ayQg" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: none; display:inline-flex; align-items:center; gap:6px; margin-top:8px;">
+      <svg width="16" height="16" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg" fill="currentColor" style="flex-shrink:0;">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Click to Join THE FOOL alliance on DC
+    </a>
+  </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
   function switchTab(name){
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
     document.getElementById('tab-extension').classList.toggle('active', name === 'extension');
+    document.getElementById('tab-howitworks').classList.toggle('active', name === 'howitworks');
     document.getElementById('tab-lore').classList.toggle('active', name === 'lore');
     document.getElementById('tab-alliance').classList.toggle('active', name === 'alliance');
   }
