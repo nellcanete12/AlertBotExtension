@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Tribes of Malaya Alerts",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.tribesofmalaya.com/*",
+    "https://discord.com/api/webhooks/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*.tribesofmalaya.com/*"],
+      "js": ["content1.js", "content2.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
