@@ -151,7 +151,7 @@
         <div class="header" id="drag-handle">
             <div class="title-row">
                 <span class="dot" id="live-dot"></span>
-                <span class="title">Tribes of Malaya Alerts</span>
+                <span class="title">THE FOOL ASSISTANT</span>
             </div>
             <button class="collapse-btn" id="collapse-btn">–</button>
         </div>
