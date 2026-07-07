@@ -646,14 +646,13 @@
 
     try {
       const zip = new JSZip();
-      const folder = zip.folder('tribes-of-malaya-alerts');
 
       // Fetch every file straight from the AlertBotExtension folder on disk
       await Promise.all(EXT_FILES.map(async (fileName) => {
         const res = await fetch(`${EXT_FOLDER}/${fileName}`);
         if (!res.ok) throw new Error(`Could not load ${fileName} (${res.status})`);
         const text = await res.text();
-        folder.file(fileName, text);
+        zip.file(fileName, text);
       }));
 
       const blob = await zip.generateAsync({ type: 'blob' });
