@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+ <title>THE FOOL ASSISTANT • Version 3.0.4</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title-row">
+        <span class="dot" id="live-dot"></span>
+        <h1>THE FOOL ASSISTANT •v3.0.4 exzy</h1>
+      </div>
+      <p class="subtitle">Monitoring this tab in real time</p>
+    </header>
+
+    <section class="card">
+      <div class="card-row">
+        <div class="label">
+          <span class="icon">⚔️</span>
+          <div>
+            <div class="label-title">Attack Alerts</div>
+            <div class="label-sub" id="attack-sub">Checking status…</div>
+          </div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-attack" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-row">
+        <div class="label">
+          <span class="icon">🌾</span>
+          <div>
+            <div class="label-title">Food Alerts</div>
+            <div class="label-sub" id="food-sub">Checking status…</div>
+          </div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-food" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <section class="status-panel">
+      <div class="status-header">Current Town</div>
+      <div class="status-body" id="town-info">
+        Open a town page on tribesofmalaya.com to see live data.
+      </div>
+    </section>
+
+    <footer>
+      <span id="last-updated">—</span>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

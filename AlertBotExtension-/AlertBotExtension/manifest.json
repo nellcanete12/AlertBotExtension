@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Tribes of Malaya Alerts",
+  "version": "3.4.4",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.tribesofmalaya.com/*",
+    "https://discord.com/api/webhooks/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*.tribesofmalaya.com/*"],
+      "js": ["content1.js", "content2.js", "overlay-main.js", "overlay-effects.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Tribes of Malaya Alerts"
+  }
+}
